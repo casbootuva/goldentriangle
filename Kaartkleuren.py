@@ -3,30 +3,45 @@
 # Kaartkleuren
 #
 #
-# Last update: 2 november 2015 door Alwin
-
+# Last update: 2 november 2015 door Alwin Lonneke en Cas
+#
+# Vraag voor maarten:
+# 1. Slaat onze class structuur ergens op? Zo ja, hoe zorgen
+#    we dan dat deze ook echt goed is, (want nu slaat het nergens op)
+# 2. Kan je lopen over een lijst met classes?
+# 3. 
+#
 # class: land
-    """ attribute
-    aangrenzende landen: array van classes
-    kleur (integer tussen 0 en oneindig)     kan dat leeg zijn????
+class provincie():
     """
+    Een leeg vak op een kaart
+    """
+    def __init__(self, name):
+        self.name = name
 
+    def aangrenzendeLanden(self):
+        self.aangrenzendeLanden = []
+        
+    def kleur(self):
+        self.kleur = 0
+  
+#erie = provincie("erie"):
+#    self.aangrenzendeLanden.append("crawford", "warren")
+
+warren = provincie("warren")
+warren.aangrenzendeLanden("erie", "crawford")
+
+    
 # aray van landen (classes)
-
-""" mag weg:
-# Kaart 3: kaart met 3 landen alleen aan elkaar
-kaart3 = {"erie":["crawford", "warren"],
-          "warren":["erie", "crawford"],
-          "crawford":["erie", "warren"]}
-"""
+arrayLanden = [erie, warren, crawford]
 
 # algoritme om te bepalen hoeveel kleuren er minimaal nodig zijn
 
 
-for provincie in range (0, arrayLanden)
+for provincie in range (0, arrayLanden):
         i = 0
-	if land(class) raakt landen waar colour != rood(0)
-		land.colour = i
+	if arrayLanden[j] raakt provincie waar colour != rood(0)
+		arrayLanden[j].kleur = i
 		i++
 		return to begin
 
