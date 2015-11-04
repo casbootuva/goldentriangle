@@ -26,14 +26,25 @@ class Province():
     """
     def __init__(self, name):
         self.name = name
- #       self.neighbours = []
+        self.neighbours = []
+        self.colour = "?"
 
 # append etc. hier toevoegen
-    def addNeighbour(self, neighbours):
-        self.neighbours.append = []
+    def addNeighbour(self, neighbour):
+        self.neighbours.append(neighbour)
         
-    def colour(self):
-        self.kleur = 0
+    def setColour(self, colourCountry):
+    	colourChecker = True
+    	for neighbour in self.neighbours:
+    		if colourCountry == neighbour.colour:
+				colourChecker = False
+
+		if colourChecker == True:
+			self.colour = colourCountry
+			print colourCountry
+		
+
+
 
 # dit later zelf uit een ander bestand halen. Dit is de data
 
@@ -41,6 +52,11 @@ erie = Province("errie")
 crawford = Province("crawford")
 warren = Province("warren")
 
+erie.addNeighbour(crawford)
+erie.addNeighbour(warren)
+erie.setColour("red")
+
+""""
 # Hier wordt alles gekoppeld
 warren.addNeighbour(erie)
 warren.addNeighbour(crawford)
@@ -50,7 +66,7 @@ arrayProvinces = [erie, warren, crawford]
 
 # algoritme om te bepalen hoeveel kleuren er minimaal nodig zijn
 
-"""
+
 for provincie in range (0, arrayLanden):
         i = 0
 	if arrayLanden[j] raakt provincie waar colour != rood(0)
@@ -71,5 +87,5 @@ for provincie in range (0, arrayLanden):
 # print visualisatie
 """
 
-print arrayProvinces
+#print arrayProvinces
 
