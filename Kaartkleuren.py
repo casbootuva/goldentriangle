@@ -37,57 +37,39 @@ class Province():
         self.neighbours.append(neighbour)
 
     def checkColor(self, colorCountry):
-    	colorChecker = True
+        colorChecker = True
         for neighbour in self.neighbours:
             if colorCountry == neighbour.color:
-    		    colorChecker = False
+                colorChecker = False
                 return False
         return True
 
-    def setColor(self, colorCountry):
+    def setColor(self):
         for color in arrayColor:
-            if checkColor(color) == True:
+            if self.checkColor(color) == True:
                 self.color = color
+                break
+
 
 
 # dit later zelf uit een ander bestand halen. Dit is de data
 
-erie = Province("errie")
+erie = Province("erie")
 crawford = Province("crawford")
 warren = Province("warren")
 
 erie.addNeighbour(crawford)
 erie.addNeighbour(warren)
 
-""""
-# Hier wordt alles gekoppeld
-warren.addNeighbour(erie)
-warren.addNeighbour(crawford)
+crawford.addNeighbour(erie)
+crawford.addNeighbour(warren)
 
-# aray van landen (classes)
-arrayProvinces = [erie, warren, crawford]
+erie.setColor()
+crawford.setColor()
+warren.setColor()
 
-# algoritme om te bepalen hoeveel kleuren er minimaal nodig zijn
+print erie.color, crawford.color, warren.color
 
 
-for provincie in range (0, arrayLanden):
-        i = 0
-	if arrayLanden[j] raakt provincie waar colour != rood(0)
-		arrayLanden[j].kleur = i
-		i++
-		return to begin
-
-	else if provincie raakt 5landen waar colour != geel
-		land.colour = i
-		i = i + 2
-	else if i raakt landen waar colour != groen
-		colour = groen
-		return begin
-	else if i raakt landen waar colour != oranje
-		colour = oranje
-		return begin
-
-# print visualisatie
-"""
 
 #print arrayProvinces
