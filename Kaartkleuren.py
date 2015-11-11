@@ -9,7 +9,7 @@
 # 1. Slaat onze class structuur ergens op? Zo ja, hoe zorgen
 #    we dan dat deze ook echt goed is, (want nu slaat het nergens op)
 # 2. Kan je lopen over een lijst met classes?
-# 3. 
+# 3.
 #
 # Comments Maarten intervisie 1:
 # Pygon gebruiken om te visualiseren. Graph visualisatie Python zijn er wel libraries
@@ -19,6 +19,9 @@
 #
 #
 #
+
+
+arrayColor = ["red", "orange", "yellow", "green", "purple"]
 # class: land
 class Province():
     """
@@ -27,23 +30,24 @@ class Province():
     def __init__(self, name):
         self.name = name
         self.neighbours = []
-        self.colour = "?"
+        self.color = "?"
 
 # append etc. hier toevoegen
     def addNeighbour(self, neighbour):
         self.neighbours.append(neighbour)
-        
-    def setColour(self, colourCountry):
-    	colourChecker = True
-    	for neighbour in self.neighbours:
-    		if colourCountry == neighbour.colour:
-				colourChecker = False
 
-		if colourChecker == True:
-			self.colour = colourCountry
-			print colourCountry
-		
+    def checkColor(self, colorCountry):
+    	colorChecker = True
+        for neighbour in self.neighbours:
+            if colorCountry == neighbour.color:
+    		    colorChecker = False
+                return False
+        return True
 
+    def setColor(self, colorCountry):
+        for color in arrayColor:
+            if checkColor(color) == True:
+                self.color = color
 
 
 # dit later zelf uit een ander bestand halen. Dit is de data
@@ -54,13 +58,12 @@ warren = Province("warren")
 
 erie.addNeighbour(crawford)
 erie.addNeighbour(warren)
-erie.setColour("red")
 
 """"
 # Hier wordt alles gekoppeld
 warren.addNeighbour(erie)
 warren.addNeighbour(crawford)
-    
+
 # aray van landen (classes)
 arrayProvinces = [erie, warren, crawford]
 
@@ -73,7 +76,7 @@ for provincie in range (0, arrayLanden):
 		arrayLanden[j].kleur = i
 		i++
 		return to begin
-	    
+
 	else if provincie raakt 5landen waar colour != geel
 		land.colour = i
 		i = i + 2
@@ -88,4 +91,3 @@ for provincie in range (0, arrayLanden):
 """
 
 #print arrayProvinces
-
