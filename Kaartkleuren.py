@@ -21,7 +21,16 @@
 #
 
 
-arrayColor = ["red", "orange", "yellow", "green", "purple"]
+arrayColor = ["red", "orange", "yellow", "green", "purple", "blue"]
+
+countryDictionary = {}
+with open("Landcodes.csv", "r") as landcodes:
+    lines = landcodes.readlines()
+    for line in lines: 
+        s = line.split(",")
+        countryDictionary[s[0]] = s[1]
+print countryDictionary
+
 # class: land
 class Province():
     """
@@ -31,6 +40,13 @@ class Province():
         self.name = name
         self.neighbours = []
         self.color = "?"
+
+
+
+# p = d["CRA"]
+# for n in [...]
+#     np = d[n]
+#     P.addNeighbour(NP)
 
 # append etc. hier toevoegen
     def addNeighbour(self, neighbour):
@@ -69,6 +85,20 @@ crawford.setColor()
 warren.setColor()
 
 print erie.color, crawford.color, warren.color
+
+# for line in file
+#     s = line.split(",")
+#     p = d(s[0])
+#     for n in s[1:]
+
+
+# p = d["CRA"]
+# for n in [...]
+#     np = d[n]
+#     P.addNeighbour(NP)
+
+
+
 
 
 
