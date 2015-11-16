@@ -21,15 +21,7 @@
 #
 
 
-arrayColor = ["red", "orange", "yellow", "green", "purple", "blue"]
 
-countryDictionary = {}
-with open("Landcodes.csv", "r") as landcodes:
-    lines = landcodes.readlines()
-    for line in lines: 
-        s = line.split(",")
-        countryDictionary[s[0]] = s[1]
-print countryDictionary
 
 # class: land
 class Province():
@@ -38,24 +30,17 @@ class Province():
     """
     def __init__(self, name):
         self.name = name
-        self.neighbours = []
+        self.neighbors = []
         self.color = "?"
 
-
-
-# p = d["CRA"]
-# for n in [...]
-#     np = d[n]
-#     P.addNeighbour(NP)
-
 # append etc. hier toevoegen
-    def addNeighbour(self, neighbour):
-        self.neighbours.append(neighbour)
+    def addNeighbor(self, neighbor):
+        self.neighbors.append(neighbor)
 
     def checkColor(self, colorCountry):
         colorChecker = True
-        for neighbour in self.neighbours:
-            if colorCountry == neighbour.color:
+        for neighbor in self.neighbors:
+            if colorCountry == neighbor.color:
                 colorChecker = False
                 return False
         return True
@@ -66,25 +51,55 @@ class Province():
                 self.color = color
                 break
 
+arrayColor = ["red", "orange", "yellow", "green", "purple", "blue"]
 
+countryDictionary = {}
+with open("landcodes.csv", "r") as landcodes:
+    lines = landcodes.readlines()
+    for line in lines: 
+        s = line.split(",")
+        countryDictionary[s[0]] = Province(str(s[1]))
+print "this is the CountryDictionary", countryDictionary
+
+neighborDictionary = {}
+with open("neighbors.csv", "r") as neighbors:
+    rows = neighbors.readlines()
+    for row in rows: 
+        n = row.split(",")
+        neighborDictionary[n[0]] = n[1:-1]
+print "this is the neighborDictionary", neighborDictionary
+
+#p = d["CRA"]
+for n in countryDictionary:
+    print n
+    for m in neighborDictionary:
+        if m == n:
+            (countryDictionary.get(n)).addNeighbor(neighborDictionary.get(m))
+
+print countryDictionary{'war'}
+
+    #for m in neighborDictionary:
+
+    #np = d[n]
+    #p.addNeighbor(NP)
 
 # dit later zelf uit een ander bestand halen. Dit is de data
 
-erie = Province("erie")
-crawford = Province("crawford")
-warren = Province("warren")
+# erie = Province("erie")
+# crawford = Province("crawford")
+# warren = Province("warren")
 
-erie.addNeighbour(crawford)
-erie.addNeighbour(warren)
+# erie.addNeighbor(crawford)
+# erie.addNeighbor(warren)
 
-crawford.addNeighbour(erie)
-crawford.addNeighbour(warren)
+# crawford.addNeighbor(erie)
+# crawford.addNeighbor(warren)
 
-erie.setColor()
-crawford.setColor()
-warren.setColor()
+# erie.setColor()
+# crawford.setColor()
+# warren.setColor()
 
-print erie.color, crawford.color, warren.color
+# print erie.color, crawford.color, warren.color
 
 # for line in file
 #     s = line.split(",")
