@@ -6,24 +6,12 @@
 # Last update: 2 november 2015 door Alwin Lonneke en Cas
 #
 # Vraag voor maarten:
-# 1. Slaat onze class structuur ergens op? Zo ja, hoe zorgen
-#    we dan dat deze ook echt goed is, (want nu slaat het nergens op)
-# 2. Kan je lopen over een lijst met classes?
-# 3.
 #
 # Comments Maarten intervisie 1:
 # Pygon gebruiken om te visualiseren. Graph visualisatie Python zijn er wel libraries
 #
-#
-#
-#
-#
-#
-
-
-
-
 # class: land
+
 class Province():
     """
     Een leeg vak op een kaart
@@ -59,7 +47,8 @@ with open("landcodes.csv", "r") as landcodes:
     for line in lines: 
         s = line.split(",")
         countryDictionary[s[0]] = Province(str(s[1]))
-print "this is the CountryDictionary", countryDictionary
+#print "this is the CountryDictionary", countryDictionary
+# Maarten: als we de dictionary willen orderen, moeten we ze eerst nog sorteren, nu automatisch los door hashing van dictionary.
 
 neighborDictionary = {}
 with open("neighbors.csv", "r") as neighbors:
@@ -67,54 +56,38 @@ with open("neighbors.csv", "r") as neighbors:
     for row in rows: 
         n = row.split(",")
         neighborDictionary[n[0]] = n[1:-1]
-print "this is the neighborDictionary", neighborDictionary
+#print "this is the neighborDictionary", neighborDictionary
 
 #p = d["CRA"]
 for n in countryDictionary:
-    print n
     for m in neighborDictionary:
         if m == n:
-            (countryDictionary.get(n)).addNeighbor(neighborDictionary.get(m))
+            #(countryDictionary.get(n)).addNeighbor(neighborDictionary.get(m))
+            for i in neighborDictionary.get(m):
+                (countryDictionary.get(n)).addNeighbor(countryDictionary.get(i))
 
-print countryDictionary{'war'}
-
-    #for m in neighborDictionary:
-
-    #np = d[n]
-    #p.addNeighbor(NP)
-
-# dit later zelf uit een ander bestand halen. Dit is de data
-
-# erie = Province("erie")
-# crawford = Province("crawford")
-# warren = Province("warren")
-
-# erie.addNeighbor(crawford)
-# erie.addNeighbor(warren)
-
-# crawford.addNeighbor(erie)
-# crawford.addNeighbor(warren)
-
-# erie.setColor()
-# crawford.setColor()
-# warren.setColor()
-
-# print erie.color, crawford.color, warren.color
-
-# for line in file
-#     s = line.split(",")
-#     p = d(s[0])
-#     for n in s[1:]
+for n in countryDictionary:
+    (countryDictionary.get(n)).setColor()
 
 
-# p = d["CRA"]
-# for n in [...]
-#     np = d[n]
-#     P.addNeighbour(NP)
+
+print countryDictionary['war'].color
+print countryDictionary['cra'].color
+print countryDictionary['mer'].color
+print countryDictionary['ven'].color
+print countryDictionary['law'].color
+print countryDictionary['eri'].color
 
 
 
 
 
 
-#print arrayProvinces
+
+
+
+
+
+
+
+
