@@ -42,7 +42,7 @@ class Province():
 arrayColor = ["red", "orange", "yellow", "green", "purple", "blue"]
 
 countryDictionary = {}
-with open("testcodes.csv", "r") as landcodes:
+with open("codes.csv", "r") as landcodes:
     lines = landcodes.readlines()
     for line in lines: 
         s = line.split(",")
@@ -51,23 +51,33 @@ with open("testcodes.csv", "r") as landcodes:
 # Maarten: als we de dictionary willen orderen, moeten we ze eerst nog sorteren, nu automatisch los door hashing van dictionary.
 
 neighborDictionary = {}
-with open("testneighbors.csv", "r") as neighbors:
+with open("neighbors.csv", "r") as neighbors:
     rows = neighbors.readlines()
     for row in rows: 
         n = row.split(",")
         neighborDictionary[n[0]] = n[1:-1]
 #print "this is the neighborDictionary", neighborDictionary
-
-#p = d["CRA"]
+ 
 for n in countryDictionary:
     for m in neighborDictionary:
         if m == n:
-            #(countryDictionary.get(n)).addNeighbor(neighborDictionary.get(m))
             for i in neighborDictionary.get(m):
                 (countryDictionary.get(n)).addNeighbor(countryDictionary.get(i))
 
-for n in countryDictionary:
-    (countryDictionary.get(n)).setColor()
+#emergency test for typo's
+#counter = 0
+for j in countryDictionary:
+    #print j
+    #print countryDictionary[j]
+    #print countryDictionary[j].neighbors
+    #counter += 1
+    #print counter
+    (countryDictionary.get(j)).setColor()
+    print countryDictionary.get(j).color
+
+
+# for key in CountryDictionary:
+#     print [key].color    
 
 # print countryDictionary['cra'].color
 # print countryDictionary['eri'].color
@@ -76,17 +86,6 @@ for n in countryDictionary:
 # print countryDictionary['mer'].color
 # print countryDictionary['law'].color
 # print countryDictionary['mck'].color
-
-
-
-
-
-
-
-
-
-
-
 
 
 
