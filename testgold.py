@@ -1,16 +1,5 @@
-# Lonneke Lammers, Cas Boot, Alwin Lijdsman
-# Heuristieken
-# Kaartkleuren
-#
-#
-# Last update: 2 november 2015 door Alwin Lonneke en Cas
-#
-# Vraag voor maarten:
-#
-# Comments Maarten intervisie 1:
-# Pygon gebruiken om te visualiseren. Graph visualisatie Python zijn er wel libraries
-#
-# class: land
+import networkx as nx
+import matplotlib.pyplot as plt
 
 class Province():
     """
@@ -38,12 +27,21 @@ class Province():
             if self.checkColor(color) == True:
                 self.color = color
                 break
+    
+    def visualize(self):
+    	nodes.append(self.name)
+    	colors.append(self.color)
+    	for neighbor in self.neighbors:
+    		edges.append((self.name, neighbor.name)) 
 
-    #def makeNotes
 
+g = nx.Graph()
 
-arrayColor = ["red", "orange", "yellow", "green", "purple", "blue"]
+edges = []
+colors = []
+nodes = []
 
+arrayColor = ["red", "orange", "white", "yellow", "green", "purple", "blue"]
 countryDictionary = {}
 with open("codes.csv", "r") as landcodes:
     lines = landcodes.readlines()
@@ -78,17 +76,29 @@ for j in countryDictionary:
     (countryDictionary.get(j)).setColor()
     print countryDictionary.get(j).color
 
+for country in countryDictionary.values():
+	country.visualize()
 
-# for key in CountryDictionary:
-#     print [key].color    
+g.add_nodes_from(nodes)
+g.add_edges_from(edges)
 
-# print countryDictionary['cra'].color
-# print countryDictionary['eri'].color
-# print countryDictionary['war'].color
-# print countryDictionary['ven'].color
-# print countryDictionary['mer'].color
-# print countryDictionary['law'].color
-# print countryDictionary['mck'].color
+position = nx.random_layout(g)
+nx.draw_networkx_labels(g,position)
 
+nx.draw_random(g, node_color=colors)
+
+plt.show()
 
 
+
+
+
+
+# G=nx.Graph()
+
+# G.add_edge(1, 3)
+# G[1][3]['color'] = 'blue'
+
+
+# nx.draw(G)
+# plt.show()
