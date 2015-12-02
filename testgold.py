@@ -120,6 +120,7 @@ for i in range (0, 1000):
             instance = countryDictionary.get(values)
             print instance.name + " " + instance.color
 
+print "The minimal amount of colors is", (int(min(colorAmountList)) + 1)
 #   DIT IS DE VISUALISATIE
 # g.add_nodes_from(nodes)
 # g.add_edges_from(edges)
