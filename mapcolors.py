@@ -7,8 +7,8 @@
 #
 
 # VOOR VISUALISATIE
-# import networkx as nx
-# import matplotlib.pyplot as plt
+import networkx as nx
+import matplotlib.pyplot as plt
 
 
 orderedDictionary = {}
@@ -50,7 +50,7 @@ for i in range (0, 1000):
         		edges.append((self.name, neighbor.name)) 
 
     # DIT IS OOK VOOR VISUALISATIE
-    # g = nx.Graph()
+    g = nx.Graph()
 
     edges = []
     colors = []
@@ -122,17 +122,18 @@ for i in range (0, 1000):
 
 print "The minimal amount of colors is", (int(min(colorAmountList)) + 1)
 #   DIT IS DE VISUALISATIE
-# g.add_nodes_from(nodes)
-# g.add_edges_from(edges)
+g.add_nodes_from(nodes)
+g.add_edges_from(edges)
 
-# position = nx.random_layout(g)
-# nx.draw_networkx_labels(g,position)
+position = nx.random_layout(g)
+nx.draw_networkx_labels(g,position)
 
-# nx.draw_random(g, node_color=colors)
+nx.draw_random(g, node_color=colors)
 
-# plt.show()
+plt.show()
 
 
+#planaire graaf
 
 #HIER WERD SOWIESO NIETS MEE GEDAAN
 # G=nx.Graph()
