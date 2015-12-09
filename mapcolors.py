@@ -93,7 +93,7 @@ for i in range (0, 1000):
     for i in countryDictionary.keys():
         orderedCountryList.append(i)
 
-    shuffle(orderedCountryList)
+    # shuffle(orderedCountryList)
     #print orderedCountryList
 
     # setcolor
