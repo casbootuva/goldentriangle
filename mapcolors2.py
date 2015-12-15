@@ -15,7 +15,7 @@ from random import shuffle
 orderedDictionary = {}
 colorAmountList = []
 
-for i in range (0, 10000):
+for i in range (0, 1000):
     
     # CLASS DEFINITION
     class Province():
@@ -59,14 +59,14 @@ for i in range (0, 10000):
 
     arrayColor = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
     countryDictionary = {}
-    with open("codes.csv", "r") as landcodes:
+    with open("PNcodes.csv", "r") as landcodes:
         lines = landcodes.readlines()
         for line in lines: 
             s = line.split(",")
             countryDictionary[s[0]] = Province(str(s[1]))
 
     neighborDictionary = {}
-    with open("neighbors.csv", "r") as neighbors:
+    with open("PNneighbors.csv", "r") as neighbors:
         rows = neighbors.readlines()
         for row in rows: 
             n = row.split(",")
@@ -129,11 +129,20 @@ for i in range (0, 10000):
     ''' 
     =============This part is used for depth first searching =====================
     '''
- 
+    # FOR FINDING CSV ERRORS
+    counter = 0
 
     # THIS IS WHERE COLORS ARE SET
     for j in orderedCountryList:
+        CSV ERRORS FINDER
+        print j
+        print countryDictionary[j]
+        print countryDictionary[j].neighbors
+        counter += 1
+        print counter
+
         (countryDictionary.get(j)).setColor()
+
         # IS VOOR PRINTEN VAN KLEUREN
         colorList.append(countryDictionary.get(j).color)
         #print countryDictionary.get(j).color
