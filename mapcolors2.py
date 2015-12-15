@@ -1,5 +1,5 @@
-# Changes made to adjust to alwins computer, changes to code, only number pulled out
-#
+# Lonnekke Lammers, Cas Boot en Alwin Lijdsman
+# Golden Triangle
 #
 #
 #
@@ -9,13 +9,15 @@
 # VOOR VISUALISATIE
 import networkx as nx
 import matplotlib.pyplot as plt
+from random import shuffle
 
-
+# THE AMOUNT OF TIMES THAT THE ALGORITHM IS PERFORMED TO CALCULATED THE STATISTICS
 orderedDictionary = {}
 colorAmountList = []
 
-for i in range (0, 1):
+for i in range (0, 10000):
     
+    # CLASS DEFINITION
     class Province():
         """
         Een leeg vak op een kaart
@@ -25,7 +27,6 @@ for i in range (0, 1):
             self.neighbors = []
             self.color = "?"
 
-    # append etc. hier toevoegen
         def addNeighbor(self, neighbor):
             self.neighbors.append(neighbor)
 
@@ -63,8 +64,6 @@ for i in range (0, 1):
         for line in lines: 
             s = line.split(",")
             countryDictionary[s[0]] = Province(str(s[1]))
-    #print "this is the CountryDictionary", countryDictionary
-    # Maarten: als we de dictionary willen orderen, moeten we ze eerst nog sorteren, nu automatisch los door hashing van dictionary.
 
     neighborDictionary = {}
     with open("neighbors.csv", "r") as neighbors:
@@ -79,16 +78,12 @@ for i in range (0, 1):
                 for i in neighborDictionary.get(m):
                     (countryDictionary.get(n)).addNeighbor(countryDictionary.get(i))
 
+
+    # THIS IS WHERE THE RANDOM/DEPTH FIRST ALGORITHM IS USED
     colorList = []
-
-    # order the country dictionary
-    from random import shuffle
-
     orderedCountryList = []
     for i in countryDictionary.keys():
         orderedCountryList.append(i)
-
-
 
     # ''' 
     # ==============This part is used for random sampling==============
@@ -111,36 +106,32 @@ for i in range (0, 1):
                 country = countryDictionary.get(j)
                 NeighborCountDict[len(country.neighbors)] = []
 
-    
     # append instantiation of country to proper key depending on neighbor count
     for i in orderedCountryList:
         for j in countryDictionary:
             if i == j:
                 country = countryDictionary.get(j)
-                NeighborCountDict[len(country.neighbors)].append(i)
+                NeighborCountDict[len(country.neighbors)].append(country)
 
+    depthFirstList = []
+    for i in range (len(NeighborCountDict) + 1, 1, -1):
 
-    print NeighborCountDict
-    #print NeighborCountDict[2][0].name
+        shuffle(NeighborCountDict[i])
+        for j in NeighborCountDict[i]:
+            depthFirstList.append(j)
 
-    # depthFirstList = []
-    # for i in range (len(NeighborCountDict),0,-1):
-
-    #     #shuffle(NeighborCountDict[i])
-    #     for j in NeighborCountDict[i]:
-    #         depthFirstList.append(j)
-
-    # Depthfirst is nu een list van lists
-#print depthFirstList[0].name # = erie op [0]
-
-    
+    orderedCountryList = []
+    for i in depthFirstList:
+        for j in countryDictionary:
+            if i == countryDictionary.get(j):
+                orderedCountryList.append(j)
 
     ''' 
     =============This part is used for depth first searching =====================
     '''
  
 
-    # setcolor
+    # THIS IS WHERE COLORS ARE SET
     for j in orderedCountryList:
         (countryDictionary.get(j)).setColor()
         # IS VOOR PRINTEN VAN KLEUREN
@@ -151,6 +142,7 @@ for i in range (0, 1):
     # prints the minmal amount of numbers
     colorAmountList.append(colorAmount)
 
+    # THIS PART IS FOR PRINTING A COLORED MAP WHEN NECESSARY - hardcoded in only finding a solution 3 now
     # prints te values and colors when the lowest coloramount has been found (in this case three)
     if colorAmount == "3": 
         orderedDictionary[colorAmount] = orderedCountryList
@@ -161,9 +153,18 @@ for i in range (0, 1):
             # PRINTS ANSWERS FOR COLOURING, DONT DELETE
             #print instance.name + " " + instance.color
 
+
+# THIS PART CALUCULATES STATISTICS OF MULTIPLE ITERATIONS
+intColorAmountList = []
+for i in colorAmountList:
+    intColorAmountList.append(float(i))
+
+average = sum(intColorAmountList) / len(intColorAmountList)
+print "The average 1000 iterations on this module is", (average + 1)
 print "The minimal amount of colors is", (int(min(colorAmountList)) + 1)
 
-#   DIT IS DE VISUALISATIE
+
+# DIT IS DE VISUALISATIE
 # g.add_nodes_from(nodes)
 # g.add_edges_from(edges)
 
