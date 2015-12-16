@@ -62,14 +62,14 @@ for i in range (0, 500):
 
     arrayColor = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     countryDictionary = {}
-    with open("INcodes.csv", "r") as landcodes:
+    with open("NWcodes.csv", "r") as landcodes:
         lines = landcodes.readlines()
         for line in lines: 
             s = line.split(",")
             countryDictionary[s[0]] = Province(str(s[1]))
 
     neighborDictionary = {}
-    with open("INneighbors.csv", "r") as neighbors:
+    with open("NWneighbors.csv", "r") as neighbors:
         rows = neighbors.readlines()
         for row in rows: 
             n = row.split(",")
@@ -118,7 +118,9 @@ for i in range (0, 500):
                 NeighborCountDict[len(country.neighbors)].append(country)
 
     depthFirstList = []
-    for i in range (len(NeighborCountDict) + 1, 1, -1):
+    # print NeighborCountDict
+    for i in range (len(NeighborCountDict), 1, -1):
+        
         shuffle(NeighborCountDict[i])
         for j in NeighborCountDict[i]:
             depthFirstList.append(j)
@@ -133,17 +135,8 @@ for i in range (0, 500):
     =============This part is used for depth first searching =====================
     '''
 
-    # FOR FINDING CSV ERRORS > can be removed when social networks definately work
-    #counter = 0
-
     # THIS IS WHERE COLORS ARE SET
     for j in orderedCountryList:
-        #CSV ERRORS FINDER
-        #print j
-        #print countryDictionary[j]
-        #print countryDictionary[j].neighbors
-        #print counter
-        #counter += 1
         (countryDictionary.get(j)).setColor()
 
         # IS VOOR PRINTEN VAN KLEUREN
@@ -158,7 +151,7 @@ for i in range (0, 500):
 
     # prints te values and colors when the lowest coloramount has been found (in this case three)
     colorOverviewList = []
-    if colorAmount == "3": 
+    if colorAmount == "4": 
         for county in orderedCountryList:
             for j in countryDictionary:
                 if county == j:
@@ -166,8 +159,8 @@ for i in range (0, 500):
                     colorOverviewList.append((countryDictionary.get(j)).color)
 
         # PRINTS ANSWERS FOR COLOURING, DONT DELETE
-        # # This is the answer dictionary
-        # # print orderedDictionary
+        # This is the answer dictionary
+        # print orderedDictionary
         # for values in orderedDictionary.get("3"):
         #     instance = countryDictionary.get(values)
         #     print instance.name + " " + instance.color
