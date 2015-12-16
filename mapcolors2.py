@@ -15,7 +15,7 @@ from random import shuffle
 orderedDictionary = {}
 colorAmountList = []
 
-for i in range (0, 1000):
+for i in range (0, 1):
     
     # CLASS DEFINITION
     class Province():
@@ -57,16 +57,16 @@ for i in range (0, 1000):
     colors = []
     nodes = []
 
-    arrayColor = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+    arrayColor = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     countryDictionary = {}
-    with open("PNcodes.csv", "r") as landcodes:
+    with open("INcodes.csv", "r") as landcodes:
         lines = landcodes.readlines()
         for line in lines: 
             s = line.split(",")
             countryDictionary[s[0]] = Province(str(s[1]))
 
     neighborDictionary = {}
-    with open("PNneighbors.csv", "r") as neighbors:
+    with open("INneighbors.csv", "r") as neighbors:
         rows = neighbors.readlines()
         for row in rows: 
             n = row.split(",")
@@ -106,6 +106,8 @@ for i in range (0, 1000):
                 country = countryDictionary.get(j)
                 NeighborCountDict[len(country.neighbors)] = []
 
+    #print NeighborCountDict
+
     # append instantiation of country to proper key depending on neighbor count
     for i in orderedCountryList:
         for j in countryDictionary:
@@ -115,7 +117,6 @@ for i in range (0, 1000):
 
     depthFirstList = []
     for i in range (len(NeighborCountDict) + 1, 1, -1):
-
         shuffle(NeighborCountDict[i])
         for j in NeighborCountDict[i]:
             depthFirstList.append(j)
@@ -129,18 +130,18 @@ for i in range (0, 1000):
     ''' 
     =============This part is used for depth first searching =====================
     '''
+
     # FOR FINDING CSV ERRORS
-    counter = 0
+    #counter = 0
 
     # THIS IS WHERE COLORS ARE SET
     for j in orderedCountryList:
-        CSV ERRORS FINDER
-        print j
-        print countryDictionary[j]
-        print countryDictionary[j].neighbors
-        counter += 1
-        print counter
-
+        #CSV ERRORS FINDER
+        #print j
+        #print countryDictionary[j]
+        #print countryDictionary[j].neighbors
+        #print counter
+        #counter += 1
         (countryDictionary.get(j)).setColor()
 
         # IS VOOR PRINTEN VAN KLEUREN
