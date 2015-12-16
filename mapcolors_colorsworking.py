@@ -57,7 +57,7 @@ for i in range (0, 1000):
     colors = []
     nodes = []
 
-    arrayColor = [('#2AD093'), ('#1E9167') ,('#0F4C36'), ('red'),('blue'),('green'),('purple')]
+    arrayColor = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     countryDictionary = {}
     with open("PNcodes.csv", "r") as landcodes:
         lines = landcodes.readlines()
@@ -112,8 +112,8 @@ for i in range (0, 1000):
     # prints the minmal amount of numbers
     colorAmountList.append(colorAmount)
 
-    for country in countryDictionary.values():
-        country.visualize()
+    # for country in countryDictionary.values():
+    #     country.visualize()
 
 
     # prints te values and colors when the lowest coloramount has been found (in this case three)
@@ -127,7 +127,16 @@ for i in range (0, 1000):
 # THIS LINE DOES NOT WORK IF YOU ENTER RED BLUE GREEN ETC
 # print "The minimal amount of colors is", (int(min(colorAmountList)) + 1)
 
-#   DIT IS DE VISUALISATIE : only works when printing one
+# op te lossen:
+# 1. Zorg dat alleen de beste wordt gekozen
+
+visualisationDict = {"0":('#2AD093'), "1":('#1E9167'), "2":('#0F4C36'), "3":('red'), "4":('blue'), "5":('green'), "6":('purple')}
+
+for country in countryDictionary.values():  #alstijd laatste dus random (klopt want 5 kleuren)
+    country.color = visualisationDict[country.color]
+    print country.name, country.color
+    country.visualize()
+
 g.add_nodes_from(nodes)
 g.add_edges_from(edges)
 
@@ -137,16 +146,3 @@ nx.draw_networkx_labels(g,position)
 nx.draw_random(g, node_color=colors)
 
 plt.show()
-
-
-#planaire graaf
-
-#HIER WERD SOWIESO NIETS MEE GEDAAN
-# G=nx.Graph()
-
-# G.add_edge(1, 3)
-# G[1][3]['color'] = 'blue'
-
-
-# nx.draw(G)
-# plt.show()
