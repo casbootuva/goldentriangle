@@ -11,14 +11,39 @@
 
 import networkx as nx
 import matplotlib.pyplot as plt
+import sys
 from random import shuffle
+
+print sys.argv[1], sys.argv[2]
+
+if (bool(sys.argv[1] != "random") & bool(sys.argv[1] != "highest")):
+    print "Error in first argument: As a first argument give either: 'random' - for random sampling or highest or; 'highest' for highest neighbor count first"
+    print "For example:" 
+    print "python matplotlib2.py random india"
+    sys.exit(0)
+
+if (bool(sys.argv[2] != "india") & bool(sys.argv[2] != "pensylvania") & bool(sys.argv[2] != "socialnetwork")):
+    print "Error in second argument: As a second argument give either: 'india', 'pensylvania' or 'socialnetwork'"
+    print "For example:" 
+    print "python matplotlib2.py random india"
+    sys.exit(0)
+
+if sys.argv[2] == "india":
+    codeFile = "INcodes.csv"
+    neighborFile = "INneighbors.csv"
+if sys.argv[2] == "pensylvania":
+    codeFile = "PNcodes.csv"
+    neighborFile = "PNneighbors.csv"
+if sys.argv[2] == "socialnetwork":
+    codeFile = "NWcodes.csv"
+    neighborFile = "NWneighbors.csv"
 
 # THE AMOUNT OF TIMES THAT THE ALGORITHM IS PERFORMED TO CALCULATED THE STATISTICS
 orderedDictionary = {}
 colorAmountList = []
 fourColorResultList = []
 
-for i in range (0, 500):
+for i in range (0, 1000):
     
     # CLASS DEFINITION
     class Province():
@@ -62,14 +87,14 @@ for i in range (0, 500):
 
     arrayColor = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     countryDictionary = {}
-    with open("NWcodes.csv", "r") as landcodes:
+    with open(codeFile, "r") as landcodes:
         lines = landcodes.readlines()
         for line in lines: 
             s = line.split(",")
             countryDictionary[s[0]] = Province(str(s[1]))
 
     neighborDictionary = {}
-    with open("NWneighbors.csv", "r") as neighbors:
+    with open(neighborFile, "r") as neighbors:
         rows = neighbors.readlines()
         for row in rows: 
             n = row.split(",")
@@ -88,52 +113,42 @@ for i in range (0, 500):
     for i in countryDictionary.keys():
         orderedCountryList.append(i)
 
-    # ''' 
-    # ==============This part is used for random sampling Comment out when using depth first ==============
-    # '''
-    # shuffle(orderedCountryList)
-    # ''' 
-    # ===============This part is used for random sampling==============
-    # '''
+    
+
+    if sys.argv[1] == "random":
+        shuffle(orderedCountryList)
+
+    elif sys.arv[1] == "highest":
+
+        # Instantion dictionary with key values ranging up to max neighbor count
+        NeighborCountDict = {}
+        for i in orderedCountryList:
+            for j in countryDictionary:
+                if i == j:
+                    country = countryDictionary.get(j)
+                    NeighborCountDict[len(country.neighbors)] = []
 
 
-    ''' 
-    =============This part is used for depth first searching - Comment out when using random =====================
-    '''
+        # Append instantiation of country to proper key depending on neighbor count
+        for i in orderedCountryList:
+            for j in countryDictionary:
+                if i == j:
+                    country = countryDictionary.get(j)
+                    NeighborCountDict[len(country.neighbors)].append(country)
 
-    # Instantion dictionary with key values ranging up to max neighbor count
-    NeighborCountDict = {}
-    for i in orderedCountryList:
-        for j in countryDictionary:
-            if i == j:
-                country = countryDictionary.get(j)
-                NeighborCountDict[len(country.neighbors)] = []
+        depthFirstList = []
+        # print NeighborCountDict
+        for i in range (len(NeighborCountDict), 1, -1):
+            
+            shuffle(NeighborCountDict[i])
+            for j in NeighborCountDict[i]:
+                depthFirstList.append(j)
 
-
-    # Append instantiation of country to proper key depending on neighbor count
-    for i in orderedCountryList:
-        for j in countryDictionary:
-            if i == j:
-                country = countryDictionary.get(j)
-                NeighborCountDict[len(country.neighbors)].append(country)
-
-    depthFirstList = []
-    # print NeighborCountDict
-    for i in range (len(NeighborCountDict), 1, -1):
-        
-        shuffle(NeighborCountDict[i])
-        for j in NeighborCountDict[i]:
-            depthFirstList.append(j)
-
-    orderedCountryList = []
-    for i in depthFirstList:
-        for j in countryDictionary:
-            if i == countryDictionary.get(j):
-                orderedCountryList.append(j)
-
-    ''' 
-    =============This part is used for depth first searching =====================
-    '''
+        orderedCountryList = []
+        for i in depthFirstList:
+            for j in countryDictionary:
+                if i == countryDictionary.get(j):
+                    orderedCountryList.append(j)
 
     # THIS IS WHERE COLORS ARE SET
     for j in orderedCountryList:
