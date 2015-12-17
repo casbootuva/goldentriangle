@@ -13,6 +13,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import sys
 from random import shuffle
+import csv
 
 print sys.argv[1], sys.argv[2]
 
@@ -42,6 +43,7 @@ if sys.argv[2] == "socialnetwork":
 orderedDictionary = {}
 colorAmountList = []
 fourColorResultList = []
+colorAmountListForHistogram = []
 
 for i in range (0, 1000):
     
@@ -118,7 +120,7 @@ for i in range (0, 1000):
     if sys.argv[1] == "random":
         shuffle(orderedCountryList)
 
-    elif sys.arv[1] == "highest":
+    elif sys.argv[1] == "highest":
 
         # Instantion dictionary with key values ranging up to max neighbor count
         NeighborCountDict = {}
@@ -185,6 +187,13 @@ for i in range (0, 1000):
 intColorAmountList = []
 for i in colorAmountList:
     intColorAmountList.append(float(i))
+    i = int(i) + 1
+    colorAmountListForHistogram.append(str(i))
+
+with open('coloramount.csv', 'wb') as f:
+    writer = csv.writer(f)
+    writer.writerows(colorAmountListForHistogram)
+
 
 average = sum(intColorAmountList) / len(intColorAmountList)
 print "The average 1000 iterations on this module is", (average + 1)
@@ -200,7 +209,7 @@ g.add_nodes_from(nodes)
 g.add_edges_from(edges)
 
 position = nx.random_layout(g)
-#nx.draw_networkx_labels(g,position)
+nx.draw_networkx_labels(g,position)
 
 nx.draw_random(g, node_color=colors)
 
