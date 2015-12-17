@@ -164,8 +164,6 @@ for i in range (0, 1000):
     # prints the minmal amount of numbers
     colorAmountList.append(colorAmount)
 
-    # Finds value of last map with solution of 4 colours used
-
     # prints te values and colors when the lowest coloramount has been found (in this case three)
     colorOverviewList = []
     if colorAmount == "4": 
@@ -174,13 +172,6 @@ for i in range (0, 1000):
                 if county == j:
                     fourColorResultList.append(countryDictionary.get(j))
                     colorOverviewList.append((countryDictionary.get(j)).color)
-
-        # PRINTS ANSWERS FOR COLOURING, DONT DELETE
-        # This is the answer dictionary
-        # print orderedDictionary
-        # for values in orderedDictionary.get("3"):
-        #     instance = countryDictionary.get(values)
-        #     print instance.name + " " + instance.color
 
 
 # Calculates and prints statistics
